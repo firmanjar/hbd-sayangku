@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kartu Ulang Tahun</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes fadeUp {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-up {
+        animation: fadeUp 1s ease forwards;
+      }
+
+      .confetti {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #f87171;
+        border-radius: 50%;
+        animation: fall 3s linear infinite;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-pink-50 min-h-screen flex items-center justify-center overflow-x-hidden relative p-4">
+    <!-- AUDIO -->
+    <audio
+      id="bgMusic"
+      src="Christina-Perri-A-Thousand-Years.mp3"
+      preload="auto"></audio>
+
+    <!-- STEP 1 -->
+    <div
+      id="step1"
+      class="text-center p-6 bg-white shadow-2xl rounded-2xl w-full max-w-md fade-up">
+      <h1 class="text-3xl font-bold text-pink-600">
+        Selamat Ulang Tahun, Sayang! 🎉
+      </h1>
+      <p class="mt-4 text-gray-600">
+        Aku punya sesuatu yang spesial buat kamu...
+      </p>
+      <button
+        onclick="nextStep()"
+        class="mt-6 bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full transition">
+        Buka Kartu
+      </button>
+    </div>
+
+    <!-- STEP 2 -->
+    <div
+      id="step2"
+      class="hidden text-center p-6 bg-white shadow-2xl rounded-2xl w-full max-w-md fade-up">
+      <h2 class="text-2xl font-bold text-pink-500">Dear Cintaku,</h2>
+      <p class="mt-4 text-gray-700 leading-relaxed">
+        Di hari spesialmu ini, aku ingin kamu tahu betapa berharganya kamu dalam
+        hidupku. kamu hadir sebagai cahaya dalam setiap hariku. aku selalu
+        merasa nyaman di dekatmu, bahkan aku sangat mencintaimu. terimakasih
+        sudah ada sampai saat ini untukku. Aku sayang kamu lebih dari kata-kata
+        bisa ungkapkan. 💖
+      </p>
+      <button
+        onclick="nextStep()"
+        class="mt-6 bg-rose-500 hover:bg-rose-600 text-white px-6 py-2 rounded-full transition">
+        Lihat Galeri Kenangan
+      </button>
+    </div>
+
+    <!-- STEP 3 - GALLERY -->
+    <div
+      id="step3"
+      class="hidden p-6 bg-white shadow-2xl rounded-2xl w-full max-w-6xl fade-up">
+      <h2 class="text-2xl sm:text-3xl font-bold text-pink-500 text-center">
+        Galeri Foto Kita 💑
+      </h2>
+      <div
+        class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div
+          class="overflow-hidden rounded-xl ring-2 ring-pink-200 hover:ring-pink-400 transition transform hover:scale-105 duration-300">
+          <img
+            src="img/WhatsApp Image 2025-06-03 at 14.00.46.jpeg"
+            class="w-full h-full object-cover aspect-video" />
+        </div>
+        <div
+          class="overflow-hidden rounded-xl ring-2 ring-pink-200 hover:ring-pink-400 transition transform hover:scale-105 duration-300">
+          <img
+            src="img/WhatsApp Image 2025-06-03 at 14.01.07.jpeg"
+            class="w-full h-full object-cover aspect-video" />
+        </div>
+        <div
+          class="overflow-hidden rounded-xl ring-2 ring-pink-200 hover:ring-pink-400 transition transform hover:scale-105 duration-300">
+          <img
+            src="img/WhatsApp Image 2025-06-03 at 14.01.14.jpeg"
+            class="w-full h-full object-cover aspect-video" />
+        </div>
+        <div
+          class="overflow-hidden rounded-xl ring-2 ring-pink-200 hover:ring-pink-400 transition transform hover:scale-105 duration-300">
+          <img
+            src="img/WhatsApp Image 2025-06-03 at 14.00.44.jpeg"
+            class="w-full h-full object-cover aspect-video" />
+        </div>
+        <div
+          class="overflow-hidden rounded-xl ring-2 ring-pink-200 hover:ring-pink-400 transition transform hover:scale-105 duration-300">
+          <img
+            src="img/WhatsApp Image 2025-06-03 at 14.00.55.jpeg"
+            class="w-full h-full object-cover aspect-video" />
+        </div>
+        <div
+          class="overflow-hidden rounded-xl ring-2 ring-pink-200 hover:ring-pink-400 transition transform hover:scale-105 duration-300">
+          <img
+            src="img/WhatsApp Image 2025-06-03 at 14.00.47.jpeg"
+            class="w-full h-full object-cover aspect-video" />
+        </div>
+      </div>
+      <p class="mt-6 text-center text-gray-600 text-sm sm:text-base">
+        Semoga hari-harimu selalu penuh cinta dan kebahagiaan ❤️
+      </p>
+    </div>
+
+    <!-- CONFETTI & SCRIPT -->
+    <script>
+      const music = document.getElementById("bgMusic");
+
+      function nextStep() {
+        const steps = ["step1", "step2", "step3"];
+        for (let i = 0; i < steps.length; i++) {
+          const current = document.getElementById(steps[i]);
+          if (!current.classList.contains("hidden")) {
+            current.classList.add("hidden");
+            if (i + 1 < steps.length) {
+              const next = document.getElementById(steps[i + 1]);
+              next.classList.remove("hidden");
+
+              // Mulai musik saat step 2 tampil
+              if (steps[i + 1] === "step2") {
+                music.play().catch(() => {
+                  alert("Klik dulu untuk memulai audio 🎶");
+                });
+              }
+
+              // Confetti hanya saat pertama dibuka
+              if (i === 0) spawnConfetti();
+            }
+            break;
+          }
+        }
+      }
+
+      function spawnConfetti() {
+        for (let i = 0; i < 60; i++) {
+          const confetti = document.createElement("div");
+          confetti.classList.add("confetti");
+          confetti.style.left = Math.random() * 100 + "vw";
+          confetti.style.animationDuration = 2 + Math.random() * 3 + "s";
+          confetti.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 5000);
+        }
+      }
+    </script>
+  </body>
+</html>
